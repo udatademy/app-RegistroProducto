@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+    <div class="col-md-5 offset-md-4">
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-center">Actualizar Productor</h5>
+            </div>
+            <div class="card-body">
+
+                <form action="/update_product/{{dataProduct._id}}", method="POST">
+                    <label>Nombre:</label>
+                    <input type="text" minlength="4" name="nombre" value="{{ dataProduct.nombre }}" class="form-control mb-3" required>
+                    <label>Precio:</label>
+                    <input type="number" step="0.01" min="1" name="precio" value="{{ dataProduct.precio }}" class="form-control mb3" required>
+                    <label>Cantidad:</label>
+                    <input type="number" min="1" name="cantidad" value="{{ dataProduct.cantidad }}" class="form-control mb-3" required>
+                    <button type="submit" class="btn btn-primary w-100">Guardar</button>
+                </form>
+                
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

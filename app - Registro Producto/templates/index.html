@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row row-col-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">
+            <div class="col-md-6 mb-3">
+
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                            </div>
+                
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="text-center">Registrar Producto</h5>
+                    </div>
+                    <div class="card-body">
+
+                        <form action="/add_product", method="POST">
+                            <label>Nombre:</label>
+                            <input type="text" minlength="4" name="nombre" class="form-control mb-3" required>
+                            <label>Precio:</label>
+                            <input type="number" step="0.01" min="1" name="precio" class="form-control mb-3" required>
+                            <label>Cantidad:</label>
+                            <input type="number" min="1" name="cantidad" class="form-control mb-3" required>
+                            <button type="submit" class="btn btn-primary w-100">Guardar</button>
+                        </form>
+                        
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6 text-center">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Lista - Productos</h5>
+                    </div>
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <td><strong>Nombre:</strong></td>
+                                <td><strong>Precio:</strong></td>
+                                <td><strong>Cantidad:</strong></td>
+                                <td><strong>Operación:</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for product in dataProducts %}
+
+                                <tr>
+                                    <td>{{ product.nombre }}</td>
+                                    <td>{{ product.precio }}</td>
+                                    <td>{{ product.cantidad }}</td>
+                                    <td>
+                                        <a href="/edith_product/{{product._id}}" class="btn btn-secondary btn-sm me-3">Editar</a>
+                                        <a href="/delete_product/{{product._id}}" class="btn btn-danger btn-sm btn-delete">Eliminar</a>
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+{% endblock %}
